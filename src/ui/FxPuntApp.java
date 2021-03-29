@@ -1,6 +1,5 @@
-package domain.Story2;
+package ui;
 
-import domain.Story2.PuntApp;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;

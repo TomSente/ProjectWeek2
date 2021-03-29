@@ -1,4 +1,4 @@
-package domain.Story2;
+package domain;
 
 import static org.junit.Assert.*;
 

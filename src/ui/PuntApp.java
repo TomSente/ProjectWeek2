@@ -1,6 +1,6 @@
-package domain.Story2;
+package ui;
 
-import domain.Story2.Punt;
+import domain.Punt;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

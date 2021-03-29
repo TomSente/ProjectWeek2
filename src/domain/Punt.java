@@ -1,4 +1,4 @@
-package domain.Story2;
+package domain;
 
 public class Punt {
     private int x;
