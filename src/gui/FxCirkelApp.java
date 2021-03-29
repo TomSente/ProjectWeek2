@@ -1,24 +1,21 @@
-package ui;
+package gui;
 
-import domain.DomainException;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import ui.CirkelApp;
 
-public class FxSpelerApp extends Application {
+public class FxCirkelApp extends Application {
 
 
     @Override
     public void start(Stage primaryStage) {
         GridPane root = new GridPane();
-        Scene scene = new Scene(root, 300,50);
-
-        new SpelerApp(root);
-
+        Scene scene = new Scene(root,200,100);
+        new CirkelApp(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Speler App");
+        primaryStage.setTitle("Cirkel App");
         primaryStage.show();
     }
 
