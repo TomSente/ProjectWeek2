@@ -23,7 +23,7 @@ public class TekeningTest {
         dak = new Driehoek(new Punt(100, 200), new Punt(300, 200), new Punt(200, 100));
         deur = new Rechthoek(new Punt(130, 280), 50,100);
         raam = new Rechthoek(new Punt(210, 220), 80, 60);
-        //deurknop = new Cirkel(new Punt(170, 320), 2);
+        deurknop = new Cirkel(new Punt(170, 320), 2);
         raambalk1 = new LijnStuk(new Punt(210, 250), new Punt(290, 250));
         raambalk2 = new LijnStuk(new Punt(250, 220), new Punt(250, 280));
         schouwNietInTekening = new Rechthoek(new Punt(150, 150), 20,40);
@@ -101,15 +101,6 @@ public class TekeningTest {
         assertTrue(huis.equals(huisMetSchouw));
     }
 
-    @Test
-    public void voegtoe_moet_een_tekening_aanmaken_met_met_een_geldige_naam() {
-        Tekening huis = createHuisZonderShouw();
-        createHuisZonderSchouw().voegToe(Shouw);
-
-    }
-
-    ??
-
     public Tekening createHuisMetSchouw() {
         Tekening huisMetSchouw = new Tekening("huisMetSchouw");
         huisMetSchouw.voegToe(gebouw);
@@ -146,4 +137,5 @@ public class TekeningTest {
         huisMetSchouwZonderDeur.voegToe(schouwNietInTekening);
         return huisMetSchouwZonderDeur;
     }
+
 }

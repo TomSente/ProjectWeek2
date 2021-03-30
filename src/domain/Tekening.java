@@ -64,7 +64,7 @@ public class Tekening {
         if(o instanceof Tekening)
         {
             Tekening t = (Tekening) o;
-            if(this.naam.equals(t.getNaam())&&this.zelfdeVormen(t))
+            if(this.zelfdeVormen(t))
             {
                 result=true;
             }
@@ -74,6 +74,10 @@ public class Tekening {
 
     public boolean zelfdeVormen(Tekening t)
     {
+        if(this.getVormen().size()!=t.getVormen().size())
+        {
+            return false;
+        }
         int counter=this.getVormen().size();
         for (Vorm v1 :this.getVormen())
         {
