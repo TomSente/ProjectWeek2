@@ -12,7 +12,7 @@ public class Tekening {
 
 
     public Tekening(String naam) {
-        if (isValidNaam(naam) == false ) {
+        if (!isValidNaam(naam)) {
             throw new IllegalArgumentException("Naam mag niet leeg zijn.");
         }
         vormen = new ArrayList<>();
@@ -54,7 +54,8 @@ public class Tekening {
             if (vorm2.equals(vorm)) {
                 return true;
             }
-        }return false;
+        }
+        return false;
 
     }
 
@@ -91,7 +92,7 @@ public class Tekening {
         String result = this.getNaam()+":\n";
         for (Vorm v :this.getVormen())
         {
-            result+=v.toString()+"\n\n";
+            result += v.toString()+"\n\n";
         }
         return result;
     }
