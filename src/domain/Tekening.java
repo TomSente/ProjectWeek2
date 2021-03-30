@@ -45,6 +45,10 @@ public class Tekening {
         vormen.remove(vorm);
     }
 
+    public ArrayList<Vorm> getVormen() {
+        return vormen;
+    }
+
     public boolean bevat(Vorm vorm) {
         for (Vorm vorm2: vormen) {
             if (vorm2.equals(vorm)) {
@@ -54,24 +58,33 @@ public class Tekening {
 
     }
 
-    public boolean equals(Tekening tekening) {
-        if (tekening == null) {
-            return false;
-        }
-        if (this.vormen.size() != tekening.vormen.size()) {
-            return false;
-        }
-        for (Vorm vorm: tekening.vormen) {
-            if (!this.bevat(vorm)) {
-                return false;
+    public boolean equals(Object o) {
+        boolean result=false;
+        if(o instanceof Tekening)
+        {
+            Tekening t = (Tekening) o;
+            if(this.naam.equals(t.getNaam())&&this.zelfdeVormen(t))
+            {
+                result=true;
             }
         }
-        for (Vorm vorm: this.vormen) {
-            if (!tekening.bevat(vorm)) {
-                return false;
+        return result;
+    }
+
+    public boolean zelfdeVormen(Tekening t)
+    {
+        int counter=this.getVormen().size();
+        for (Vorm v1 :this.getVormen())
+        {
+            for(Vorm v2 :t.getVormen())
+            {
+                if(v1.equals(v2))
+                {
+                    counter-=1;
+                }
             }
         }
-        return true;
+        return counter==0;
     }
 
     public String toString() {

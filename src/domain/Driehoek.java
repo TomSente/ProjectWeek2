@@ -71,7 +71,8 @@ public class Driehoek extends Vorm{
         punten.add(punt3);
         punten.sort(new Comparator<Punt>() {
             @Override
-            public int compare(Punt p1, Punt p2) {
+            public int compare(Punt p1, Punt p2)
+            {
                 if (Integer.compare(p1.getX(), p2.getX()) != 0) {
                     return Integer.compare(p1.getX(), p2.getX());
                 } else {
@@ -79,10 +80,6 @@ public class Driehoek extends Vorm{
                 }
             }
         });
-
-
-
-
     }
 
     public String toString()
