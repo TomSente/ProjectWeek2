@@ -1,4 +1,4 @@
 package domain;
 
-public abstract class Vorm {
+public class Vorm {
 }

@@ -1,6 +1,6 @@
 package domain;
 
-public class Punt {
+public class Punt implements Comparable<Punt> {
     private int x;
     private int y;
 
@@ -31,7 +31,7 @@ public class Punt {
         if(o instanceof Punt)
         {
             Punt p = (Punt) o;
-            if(this.getX()==p.getX()&& this.getX()==this.getY())
+            if(this.getX()==p.getX()&& this.getY()==p.getY())
             {
                 result=true;
             }
@@ -39,8 +39,26 @@ public class Punt {
         return result;
     }
 
+
     public String toString(){
         return "(" + x + "," + y + ")";
     }
 
+    @Override
+    public int compareTo(Punt o) {
+
+
+
+        if(this.getX()==o.getX()&& this.getY()==o.getY())
+        {
+            return 0;
+        }
+        return 0;
+    }
 }
+/**
+//punt1.compareTo(punt2)
+//punt1>punt2 --> 1
+//punt1==punt2 -->0
+//punt1<punt2 -->-1
+*/
