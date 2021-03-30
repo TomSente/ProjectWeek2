@@ -88,7 +88,7 @@ public class Tekening {
     }
 
     public String toString() {
-        String result = "Tekening bestaat uit:";
+        String result = this.getNaam()+":\n";
         for (Vorm v :this.getVormen())
         {
             result+=v.toString()+"\n\n";
