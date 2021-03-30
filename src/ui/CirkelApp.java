@@ -61,7 +61,6 @@ public class CirkelApp {
             {
 
                 invoerY.clear();
-
                 foutenboodschap.setTitle("Warning");
                 foutenboodschap.setContentText("y coordinaat moet een geheel getal zijn");
                 foutenboodschap.showAndWait();
