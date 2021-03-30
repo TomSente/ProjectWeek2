@@ -1,6 +1,6 @@
 package domain;
 
-public class Rechthoek {
+public class Rechthoek extends Vorm {
     private int breedte;
     private int hoogte;
     private Punt linkerBovenHoek;
@@ -8,7 +8,7 @@ public class Rechthoek {
     public Rechthoek(Punt punt, int breedte, int hoogte){
         if(punt == null){throw new DomainException("Linkerbovenhoek mag niet leeg zijn!");}
         if(breedte <=0){throw new DomainException("Breedte moet groter zijn dan 0");}
-        if(hoogte <=0){throw new DomainException("hoogte moet groter zijn dan 0");}
+        if(hoogte <=0){throw new DomainException("Hoogte moet groter zijn dan 0");}
         setBreedte(breedte);
         setHoogte(hoogte);
         setLinkerBovenHoek(punt);
@@ -29,9 +29,13 @@ public class Rechthoek {
         return linkerBovenHoek;
     }
 
-    public boolean equals(Rechthoek rechthoek){
-        if(rechthoek == null) return false;
-        return breedte == rechthoek.breedte && hoogte == rechthoek.hoogte && linkerBovenHoek == rechthoek.linkerBovenHoek;
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof Rechthoek) {
+            Rechthoek r = (Rechthoek) o;
+            return breedte == r.breedte && hoogte == r.hoogte && linkerBovenHoek == r.linkerBovenHoek;
+        }return false;
+
     }
 
     public String toString(){
@@ -40,7 +44,6 @@ public class Rechthoek {
     }
     public Omhullende getOmhullende()
     {
-        Omhullende o = new Omhullende(linkerBovenHoek,breedte,hoogte);
-        return  o;
+        return new Omhullende(linkerBovenHoek,breedte,hoogte);
     }
 }

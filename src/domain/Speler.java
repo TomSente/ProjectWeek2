@@ -20,7 +20,7 @@ public class Speler {
     public void setNaam(String naam) {
         if(naam==null||naam.trim().isEmpty())
         {
-            throw new DomainException("naam mag niet leeg zijn");
+            throw new DomainException("Naam mag niet leeg zijn");
         }
         this.naam = naam;
     }
@@ -29,7 +29,7 @@ public class Speler {
     {
         if(score<0)
         {
-            throw new DomainException("score mag niet negatief zijn");
+            throw new DomainException("Score mag niet negatief zijn");
         }
         this.score = score;
     }

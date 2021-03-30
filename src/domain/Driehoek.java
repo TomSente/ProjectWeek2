@@ -17,11 +17,11 @@ public class Driehoek extends Vorm{
         }
         if(punt1.equals(punt2)||punt1.equals(punt3)||punt2.equals(punt3))
         {
-            throw new DomainException("geen 2 punten mogen dezelfde zijn");
+            throw new DomainException("Geen 2 punten mogen dezelfde zijn");
         }
         else if (liggenOp1Lijn(punt1, punt2, punt3))
         {
-            throw new DomainException("de 3 punten mogen niet op 1 lijn liggen");
+            throw new DomainException("De 3 punten mogen niet op 1 lijn liggen");
         }
         else
         {
