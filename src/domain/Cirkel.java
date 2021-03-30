@@ -31,15 +31,19 @@ public class Cirkel {
         return radius;
     }
 
-    public boolean equals(Cirkel cirkel) {
-        if (cirkel == null) {
-            return false;
+    @Override
+    public boolean equals(Object o)
+    {
+        boolean result=false;
+        if(o instanceof Cirkel)
+        {
+            Cirkel c = (Cirkel) o;
+            if(this.getMiddelpunt().equals(c.getMiddelpunt())&&this.getRadius()==c.getRadius())
+            {
+                result=true;
+            }
         }
-        if (this.middelpunt == cirkel.getMiddelpunt() && this.radius == cirkel.getRadius()) {
-            return true;
-        } else {
-            return false;
-        }
+        return result;
     }
 
     public String toString() {

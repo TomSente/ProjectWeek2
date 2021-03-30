@@ -11,7 +11,7 @@ public class Driehoek extends Vorm{
         {
             throw new DomainException("geen 2 punten mogen dezelfde zijn");
         }
-        else if (((punt2.getX()-punt1.getX())*(punt3.getY()-punt1.getY()))==((punt3.getX()-punt1.getX())*(punt2.getY())-punt1.getY()))
+        else if (liggenOp1Lijn(punt1, punt2, punt3))
         {
             throw new DomainException("de 3 punten mogen niet op 1 lijn liggen");
         }
@@ -34,6 +34,14 @@ public class Driehoek extends Vorm{
     public Punt getPunt3() {
         return punt3;
     }
+
+    public boolean liggenOp1Lijn(Punt punt1, Punt punt2, Punt punt3)
+    {
+        return ((punt2.getX() - punt1.getX()) * (punt3.getY() - punt1.getY())) == ((punt3.getX() - punt1.getX()) * (punt2.getY()) - punt1.getY());
+    }
+
+
+
 
 
 }
