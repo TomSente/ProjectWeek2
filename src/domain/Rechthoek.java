@@ -35,7 +35,12 @@ public class Rechthoek {
     }
 
     public String toString(){
-        return "Rechthoek: linkerbovenhoek "+linkerBovenHoek+ "- breedte: "+breedte+"- hoogte: "+hoogte;
+        return "Rechthoek: linkerbovenhoek "+linkerBovenHoek+ " - breedte: "+breedte+" - hoogte: "+hoogte + getOmhullende().toString();
 
+    }
+    public Omhullende getOmhullende()
+    {
+        Omhullende o = new Omhullende(linkerBovenHoek,breedte,hoogte);
+        return  o;
     }
 }

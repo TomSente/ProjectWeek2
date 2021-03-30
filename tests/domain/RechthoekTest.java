@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.sound.midi.Receiver;
+
 public class RechthoekTest {
 
     private Punt linkerBovenhoek;
@@ -82,4 +84,13 @@ public class RechthoekTest {
     public void equals_moet_false_teruggeven_als_parameter_null(){
         assertFalse(rechthoek.equals(null));
     }
+
+    @Test
+    public void getOmhullende_geeft_juiste_waarde_weer()
+    {
+        Rechthoek r = new Rechthoek(linkerBovenhoek,breedte,hoogte);
+        Omhullende o = new Omhullende(linkerBovenhoek,breedte,hoogte);
+        assertEquals(o,r.getOmhullende());
+    }
+
 }
