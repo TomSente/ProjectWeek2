@@ -88,8 +88,12 @@ public class Tekening {
     }
 
     public String toString() {
-        return "Tekening";
-
+        String result = "Tekening bestaat uit:";
+        for (Vorm v :this.getVormen())
+        {
+            result+=v.toString()+"\n\n";
+        }
+        return result;
     }
 
 
