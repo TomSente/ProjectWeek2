@@ -1,8 +1,6 @@
 package ui;
 
-import domain.Cirkel;
-import domain.Punt;
-import domain.Rechthoek;
+import domain.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,9 +14,64 @@ public class RechthoekApp {
 
     private Punt punt;
     private int breedte, hoogte, x, y;
-    private Rechthoek rechthoek;
+    private Vorm vorm;
 
     public RechthoekApp(GridPane root) {
+        init(root, 0);
+        invoerHoogte.setOnAction(eventIngaveHoogte -> {
+            try{
+                hoogte = Integer.parseInt(invoerHoogte.getText());
+                vorm = new Rechthoek(punt,breedte,hoogte);
+                root.getChildren().clear();
+                Text uitvoer = new Text();
+                uitvoer.setText(vorm.toString());
+                root.add(uitvoer, 0,0);
+            }
+            catch (NumberFormatException e){
+                invoerHoogte.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setContentText("hoogte moet een geheel getal zijn");
+                foutenboodschap.showAndWait();
+            }
+            catch (DomainException e){
+                invoerHoogte.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setHeaderText(null);
+                foutenboodschap.setContentText(e.getMessage());
+                foutenboodschap.showAndWait();
+            }
+
+        });
+
+    }
+
+    public RechthoekApp(GridPane root, Tekening tekening) {
+        init(root, 1);
+        invoerHoogte.setOnAction(eventIngaveHoogte -> {
+            try{
+                hoogte = Integer.parseInt(invoerHoogte.getText());
+                vorm = new Rechthoek(punt,breedte,hoogte);
+                tekening.voegToe(vorm);
+                cleanUp(root);
+            }
+            catch (NumberFormatException e){
+                invoerHoogte.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setContentText("hoogte moet een geheel getal zijn");
+                foutenboodschap.showAndWait();
+            }
+            catch (DomainException e){
+                invoerHoogte.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setHeaderText(null);
+                foutenboodschap.setContentText(e.getMessage());
+                foutenboodschap.showAndWait();
+            }
+
+        });
+    }
+
+    public void init(GridPane root, int teller) {
 
         invoerXLinksLabel = new Label("Geef de x-coordinaat van de linkerbovenhoek van de rechthoek ");
         invoerXLinks = new TextField();
@@ -29,8 +82,8 @@ public class RechthoekApp {
         invoerHoogteLabel = new Label("Geef de hoogte van de rechthoek");
         invoerHoogte = new TextField();
 
-        root.add(invoerXLinksLabel, 0, 0);
-        root.add(invoerXLinks, 1, 0);
+        root.add(invoerXLinksLabel, 0, teller);
+        root.add(invoerXLinks, 1, teller);
 
 
         invoerXLinks.setOnAction(eventIngaveX -> {
@@ -38,8 +91,8 @@ public class RechthoekApp {
 
                 x = Integer.parseInt(invoerXLinks.getText());
                 invoerXLinks.setDisable(true);
-                root.add(invoerYLinksLabel, 0, 1);
-                root.add(invoerYLinks, 1, 1);
+                root.add(invoerYLinksLabel, 0, teller+1);
+                root.add(invoerYLinks, 1, teller+1);
             } catch (NumberFormatException e) {
                 invoerXLinks.clear();
                 foutenboodschap.setTitle("Warning");
@@ -51,8 +104,8 @@ public class RechthoekApp {
         invoerYLinks.setOnAction(eventIngaveY -> {
             try {
                 punt = new Punt(Integer.parseInt(invoerXLinks.getText()), Integer.parseInt(invoerYLinks.getText()));
-                root.add(invoerBreedteLabel, 0, 2);
-                root.add(invoerBreedte, 1, 2);
+                root.add(invoerBreedteLabel, 0, teller + 2);
+                root.add(invoerBreedte, 1, teller +2);
             } catch (NumberFormatException e) {
 
                 invoerYLinks.clear();
@@ -67,8 +120,8 @@ public class RechthoekApp {
             try{
                 breedte = Integer.parseInt(invoerBreedte.getText());
                 invoerBreedte.setDisable(true);
-                root.add(invoerHoogteLabel,0,3);
-                root.add(invoerHoogte,1,3);
+                root.add(invoerHoogteLabel,0,teller+3);
+                root.add(invoerHoogte,1,teller+3);
             } catch (NumberFormatException e){
                 invoerBreedte.clear();
                 foutenboodschap.setTitle("Warning");
@@ -76,24 +129,17 @@ public class RechthoekApp {
                 foutenboodschap.showAndWait();
             }
         });
-        invoerHoogte.setOnAction(eventIngaveHoogte -> {
-            try{
-                hoogte = Integer.parseInt(invoerHoogte.getText());
-                invoerBreedte.setDisable(true);
-                rechthoek = new Rechthoek(punt,breedte,hoogte);
-                Text uitvoer = new Text();
-                uitvoer.setText(rechthoek.toString());
-                root.getChildren().clear();
-                root.add(uitvoer, 0,0);
-            }
-            catch (NumberFormatException e){
-                invoerHoogte.clear();
-                foutenboodschap.setTitle("Warning");
-                foutenboodschap.setContentText("hoogte moet een geheel getal zijn");
-                foutenboodschap.showAndWait();
-            }
 
-        });
+    }
+    private void  cleanUp(GridPane root){
+        root.getChildren().remove(invoerBreedteLabel);
+        root.getChildren().remove(invoerBreedte);
+        root.getChildren().remove(invoerHoogte);
+        root.getChildren().remove(invoerHoogteLabel);
+        root.getChildren().remove(invoerYLinks);
+        root.getChildren().remove(invoerYLinksLabel);
+        root.getChildren().remove(invoerXLinks);
+        root.getChildren().remove(invoerXLinksLabel);
 
     }
 }

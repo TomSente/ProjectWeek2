@@ -1,8 +1,6 @@
 package ui;
 
-import domain.Cirkel;
-import domain.LijnStuk;
-import domain.Punt;
+import domain.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,9 +14,65 @@ public class LijnStukApp {
 
     private int x1, x2, y1, y;
     private Punt startpunt, eindpunt;
-    private LijnStuk lijnstuk;
+    private Vorm vorm;
 
     public LijnStukApp(GridPane root) {
+        init(root, 0);
+        invoerYEindPunt.setOnAction(eventIngaveYEind -> {
+            try {
+                eindpunt = new Punt(Integer.parseInt(invoerXEindPunt.getText()), Integer.parseInt(invoerYEindPunt.getText()));
+                vorm = new LijnStuk(startpunt, eindpunt);
+                Text uitvoer = new Text();
+                uitvoer.setText(vorm.toString());
+                root.getChildren().clear();
+                root.add(uitvoer, 0, 0);
+
+            } catch (NumberFormatException e) {
+
+                invoerYEindPunt.clear();
+
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setContentText("y coordinaat moet een geheel getal zijn");
+                foutenboodschap.showAndWait();
+            }
+            catch (DomainException e){
+                invoerYEindPunt.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setHeaderText(null);
+                foutenboodschap.setContentText(e.getMessage());
+                foutenboodschap.showAndWait();
+            }
+        });
+    }
+
+    public LijnStukApp(GridPane root, Tekening tekening) {
+        init(root, 1);
+        invoerYEindPunt.setOnAction(eventIngaveYEind -> {
+            try {
+                eindpunt = new Punt(Integer.parseInt(invoerXEindPunt.getText()), Integer.parseInt(invoerYEindPunt.getText()));
+                vorm = new LijnStuk(startpunt, eindpunt);
+                tekening.voegToe(vorm);
+                cleanUp(root);
+
+            } catch (NumberFormatException e) {
+
+                invoerYEindPunt.clear();
+
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setContentText("y coordinaat moet een geheel getal zijn");
+                foutenboodschap.showAndWait();
+            }
+            catch (DomainException e){
+                invoerYEindPunt.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setHeaderText(null);
+                foutenboodschap.setContentText(e.getMessage());
+                foutenboodschap.showAndWait();
+            }
+        });
+    }
+
+    public void init(GridPane root, int teller) {
         invoerXStartPuntLabel = new Label("Geef de x-coördinaat van het startpunt.");
         invoerXStartPunt = new TextField();
         invoerYStartPuntLabel = new Label("Geef de y-coördinaat van het startpunt.");
@@ -28,16 +82,16 @@ public class LijnStukApp {
         invoerYEindPuntLabel = new Label("Geef de y-coördinaat van het eindpunt.");
         invoerYEindPunt = new TextField();
 
-        root.add(invoerXStartPuntLabel, 0, 0);
-        root.add(invoerXStartPunt, 1, 0);
+        root.add(invoerXStartPuntLabel, 0, teller);
+        root.add(invoerXStartPunt, 1, teller);
 
         invoerXStartPunt.setOnAction(eventIngaveXStart -> {
             try {
 
                 x1 = Integer.parseInt(invoerXStartPunt.getText());
                 invoerXStartPunt.setDisable(true);
-                root.add(invoerYStartPuntLabel, 0, 1);
-                root.add(invoerYStartPunt, 1, 1);
+                root.add(invoerYStartPuntLabel, 0, teller+1);
+                root.add(invoerYStartPunt, 1, teller+1);
             } catch (NumberFormatException e) {
                 invoerXStartPunt.clear();
                 foutenboodschap.setTitle("Warning");
@@ -50,8 +104,8 @@ public class LijnStukApp {
             try {
                 startpunt = new Punt(Integer.parseInt(invoerXStartPunt.getText()), Integer.parseInt(invoerYStartPunt.getText()));
                 invoerYStartPunt.setDisable(true);
-                root.add(invoerXEindPuntLabel, 0, 2);
-                root.add(invoerXEindPunt, 1, 2);
+                root.add(invoerXEindPuntLabel, 0, teller+2);
+                root.add(invoerXEindPunt, 1, teller+2);
             } catch (NumberFormatException e) {
 
                 invoerYStartPunt.clear();
@@ -67,8 +121,8 @@ public class LijnStukApp {
 
                 x1 = Integer.parseInt(invoerXEindPunt.getText());
                 invoerXEindPunt.setDisable(true);
-                root.add(invoerYEindPuntLabel, 0, 3);
-                root.add(invoerYEindPunt, 1, 3);
+                root.add(invoerYEindPuntLabel, 0, teller+3);
+                root.add(invoerYEindPunt, 1, teller+3);
             } catch (NumberFormatException e) {
                 invoerXEindPunt.clear();
                 foutenboodschap.setTitle("Warning");
@@ -76,24 +130,19 @@ public class LijnStukApp {
                 foutenboodschap.showAndWait();
             }
         });
-        invoerYEindPunt.setOnAction(eventIngaveYEind -> {
-            try {
-                eindpunt = new Punt(Integer.parseInt(invoerXEindPunt.getText()), Integer.parseInt(invoerYEindPunt.getText()));
-                lijnstuk = new LijnStuk(startpunt, eindpunt);
-                Text uitvoer = new Text();
-                uitvoer.setText(lijnstuk.toString());
-                root.getChildren().clear();
-                root.add(uitvoer, 0, 0);
 
-            } catch (NumberFormatException e) {
 
-                invoerYEindPunt.clear();
+    }
+    private void  cleanUp(GridPane root){
+        root.getChildren().remove(invoerXEindPunt);
+        root.getChildren().remove(invoerXEindPuntLabel);
+        root.getChildren().remove(invoerXStartPunt);
+        root.getChildren().remove(invoerXStartPuntLabel);
+        root.getChildren().remove(invoerYEindPunt);
+        root.getChildren().remove(invoerYEindPuntLabel);
+        root.getChildren().remove(invoerYStartPunt);
+        root.getChildren().remove(invoerYStartPuntLabel);
 
-                foutenboodschap.setTitle("Warning");
-                foutenboodschap.setContentText("y coordinaat moet een geheel getal zijn");
-                foutenboodschap.showAndWait();
-            }
-        });
 
     }
 }

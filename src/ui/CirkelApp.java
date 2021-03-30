@@ -1,7 +1,6 @@
 package ui;
 
-import domain.Cirkel;
-import domain.Punt;
+import domain.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -9,84 +8,120 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class CirkelApp {
-    private Label invoerXLabel, invoerYLabel, invoerRadiusLabel;
-    private TextField invoerX, invoerY, invoerRadius;
+
+    private Label invoerXLabel, invoerYLabel, invoerStraalLabel;
+    private TextField invoerX, invoerY, invoerStraal;
+
     private Alert foutenboodschap = new Alert(Alert.AlertType.WARNING);
 
-    private Punt punt;
-    private int radius,x,y;
-    private Cirkel cirkel;
+    private Vorm vorm;
 
     public CirkelApp(GridPane root) {
 
 
-        invoerXLabel =  new Label("Geef de x-coordinaat van het middelpunt van de cirkel ");
-        invoerX= new TextField();
-        invoerYLabel = new Label("Geef de y-coordinaat van het middelpunt van de cirkel ");
-        invoerY = new TextField();
-        invoerRadiusLabel = new Label("Geef de straal van de cirkel.");
-        invoerRadius = new TextField();
+        init(root,0);
+        invoerStraal.setOnAction(eventIngaveStraal -> {
+            try {
+                Punt middelpunt = new Punt(Integer.parseInt(invoerX.getText()),Integer.parseInt(invoerY.getText()));
+                vorm = new Cirkel(middelpunt, Integer.parseInt(invoerStraal.getText()));
+                root.getChildren().clear();
+                Text uitvoer = new Text();
+                uitvoer.setText(vorm.toString());
+                root.add(uitvoer,0,0);
 
-
-        root.add(invoerXLabel,0,0);
-        root.add(invoerX,1,0);
-
-
-
-        invoerX.setOnAction(eventIngaveX ->{
-            try
-            {
-
-                x=Integer.parseInt(invoerX.getText());
-                invoerX.setDisable(true);
-                root.add(invoerYLabel, 0, 1);
-                root.add(invoerY, 1, 1);
-            }
-            catch(NumberFormatException e)
-            {
-                invoerX.clear();
+            }catch (NumberFormatException ne){
+                invoerStraal.clear();
                 foutenboodschap.setTitle("Warning");
-                foutenboodschap.setContentText("x coordinaat moet een geheel getal zijn");
+                foutenboodschap.setContentText("straal van de cirkel moet een geheel getal zijn");
                 foutenboodschap.showAndWait();
             }
+            catch (DomainException e){
+                invoerStraal.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setHeaderText(null);
+                foutenboodschap.setContentText(e.getMessage());
+                foutenboodschap.showAndWait();
+            }
+
+        });
+    }
+
+
+    public CirkelApp(GridPane root, Tekening tekening) {
+        init(root,1);
+        invoerStraal.setOnAction(eventIngaveStraal -> {
+            try {
+                Punt middelpunt = new Punt(Integer.parseInt(invoerX.getText()),Integer.parseInt(invoerY.getText()));
+                vorm = new Cirkel(middelpunt, Integer.parseInt(invoerStraal.getText()));
+                tekening.voegToe(vorm);
+                cleanUp(root);
+
+            } catch (NumberFormatException ne){
+                invoerStraal.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setContentText("straal van de cirkel moet een geheel getal zijn");
+                foutenboodschap.showAndWait();
+            }
+            catch (DomainException e){
+                cleanUp(root);
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setHeaderText(null);
+                foutenboodschap.setContentText(e.getMessage());
+                foutenboodschap.showAndWait();
+            }
+
+        });
+    }
+
+    private void init(GridPane root, int teller){
+        invoerXLabel =  new Label("Geef de x-coÃ¶rdinaat van het middelpunt van de cirkel ");
+        invoerX= new TextField();
+
+        invoerYLabel = new Label("Geef de y-coÃ¶rdinaat van het middelpunt van de cirkel ");
+        invoerY = new TextField();
+
+        invoerStraalLabel = new Label("Geef de straal van de cirkel");
+        invoerStraal = new TextField();
+
+        root.add(invoerXLabel,0,teller);
+        root.add(invoerX,1,teller);
+
+        invoerX.setOnAction(eventIngaveX ->{
+            try {
+                Integer.parseInt(invoerX.getText());
+                root.add(invoerYLabel, 0, teller + 1);
+                root.add(invoerY, 1, teller + 1);
+            }
+            catch(NumberFormatException e){
+                invoerX.clear();
+                foutenboodschap.setTitle("Warning");
+                foutenboodschap.setContentText("x coÃ¶rdinaat van middelpunt van de cirkel moet een geheel getal zijn");
+                foutenboodschap.showAndWait();
+            }
+
         });
 
         invoerY.setOnAction(eventIngaveY -> {
-            try
-            {
-                punt = new Punt(Integer.parseInt(invoerX.getText()), Integer.parseInt(invoerY.getText()));
-                root.add(invoerRadiusLabel,0,2);
-                root.add(invoerRadius,1,2);
-            }
-            catch(NumberFormatException e)
-            {
-
+            try {
+                Integer.parseInt(invoerY.getText());
+                root.add(invoerStraalLabel, 0, teller + 2);
+                root.add(invoerStraal, 1, teller +  2);
+            } catch (NumberFormatException e){
                 invoerY.clear();
                 foutenboodschap.setTitle("Warning");
-                foutenboodschap.setContentText("y coordinaat moet een geheel getal zijn");
+                foutenboodschap.setContentText("y coÃ¶rdinaat van middelpunt van de cirkel moet een geheel getal zijn");
                 foutenboodschap.showAndWait();
-            }
-        });
-
-        invoerRadius.setOnAction(eventIngaveRadius ->{
-            try
-            {
-                radius = Integer.parseInt(invoerRadius.getText());
-                cirkel = new Cirkel(punt,radius);
-                Text uitvoer = new Text();
-                uitvoer.setText(cirkel.toString());
-                root.getChildren().clear();
-                root.add(uitvoer, 0, 0);
 
             }
-            catch(NumberFormatException e)
-            {
-                invoerX.clear();
-                foutenboodschap.setTitle("Warning");
-                foutenboodschap.setContentText("radius moet positief zijn");
-                foutenboodschap.showAndWait();
-            }
         });
+    }
+    private void  cleanUp(GridPane root){
+        root.getChildren().remove(invoerXLabel);
+        root.getChildren().remove(invoerX);
+        root.getChildren().remove(invoerYLabel);
+        root.getChildren().remove(invoerY);
+        root.getChildren().remove(invoerStraalLabel);
+        root.getChildren().remove(invoerStraal);
 
     }
 }

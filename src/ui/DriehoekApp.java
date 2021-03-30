@@ -21,7 +21,7 @@ public class DriehoekApp
     private Driehoek driehoek;
     private Alert foutenboodschap = new Alert(Alert.AlertType.WARNING);
 
-    public DriehoekApp(GridPane root)
+    public void init(GridPane root, int teller)
     {
         invoerXPunt1Label =  new Label("Geef de x-coordinaat van het 1ste punt ");
         invoerXPunt1= new TextField();

@@ -101,6 +101,15 @@ public class TekeningTest {
         assertTrue(huis.equals(huisMetSchouw));
     }
 
+    @Test
+    public void voegtoe_moet_een_tekening_aanmaken_met_met_een_geldige_naam() {
+        Tekening huis = createHuisZonderShouw();
+        createHuisZonderSchouw().voegToe(Shouw);
+
+    }
+
+    ??
+
     public Tekening createHuisMetSchouw() {
         Tekening huisMetSchouw = new Tekening("huisMetSchouw");
         huisMetSchouw.voegToe(gebouw);
@@ -137,5 +146,4 @@ public class TekeningTest {
         huisMetSchouwZonderDeur.voegToe(schouwNietInTekening);
         return huisMetSchouwZonderDeur;
     }
-
 }

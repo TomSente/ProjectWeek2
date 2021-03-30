@@ -29,6 +29,11 @@ public class Tekening {
 
     public void voegToe(Vorm vorm) {
         if(vorm == null)throw new IllegalArgumentException("De vorm mag niet null zijn.");
+        for (Vorm v: vormen) {
+            if (v.equals(vorm)){
+                throw new IllegalArgumentException("Deze vorm staat al in de tekening.");
+            }
+        }
         vormen.add(vorm);
     }
 
@@ -37,11 +42,7 @@ public class Tekening {
     }
 
     public void verwijder(Vorm vorm) {
-        for (Vorm v: vormen) {
-            if (v.equals(vorm)) {
-                vormen.remove(v);
-            }
-        }
+        vormen.remove(vorm);
     }
 
     public boolean bevat(Vorm vorm) {
@@ -77,4 +78,6 @@ public class Tekening {
         return "Tekening";
 
     }
+
+
 }
