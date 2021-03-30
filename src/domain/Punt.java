@@ -45,13 +45,19 @@ public class Punt implements Comparable<Punt> {
     }
 
     @Override
-    public int compareTo(Punt o) {
-
-
-
+    public int compareTo(Punt o)
+    {
+        if(this.getX()>o.getX()&&this.getY()>o.getY())
+        {
+            return 1;
+        }
         if(this.getX()==o.getX()&& this.getY()==o.getY())
         {
             return 0;
+        }
+        if(this.getX()<o.getX()&&this.getY()<o.getY())
+        {
+            return -1;
         }
         return 0;
     }

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import ui.FiguurApp;
+import ui.SpelerApp;
 
 public class FxFiguurApp extends Application {
 

@@ -1,6 +1,6 @@
 package domain;
 
-public class Cirkel extends Vorm {
+public class Cirkel {
     private Punt middelpunt;
     private int radius;
 

@@ -15,7 +15,7 @@ public class Driehoek extends Vorm{
         {
             throw new DomainException("hoekpunten mogen niet leeg zijn");
         }
-        if(punt1.equals(punt2)||punt1.equals(punt3)||punt2.equals(punt3))
+        else if(punt1.equals(punt2)||punt1.equals(punt3)||punt2.equals(punt3))
         {
             throw new DomainException("Geen 2 punten mogen dezelfde zijn");
         }
@@ -60,7 +60,7 @@ public class Driehoek extends Vorm{
 
     public boolean liggenOp1Lijn(Punt punt1, Punt punt2, Punt punt3)
     {
-        return ((punt2.getX() - punt1.getX()) * (punt3.getY() - punt1.getY())) == ((punt3.getX() - punt1.getX()) * (punt2.getY()) - punt1.getY());
+        return ((punt2.getX() - punt1.getX()) * (punt3.getY() - punt1.getY())) == ((punt3.getX() - punt1.getX()) * (punt2.getY() - punt1.getY()));
     }
 
     public void sorteerHoekPunten()
