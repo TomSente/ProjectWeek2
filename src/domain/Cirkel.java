@@ -45,8 +45,19 @@ public class Cirkel extends Vorm {
         }
         return result;
     }
+    @Override
+    public Omhullende getOmhullende()
+    {
+        int x = middelpunt.getX()-radius;
+        int y = middelpunt.getY()-radius;
+        Punt p = new Punt(x,y);
+        Omhullende uitvoer = new Omhullende(p,radius*2,radius*2);
+        return uitvoer;
+
+    }
 
     public String toString() {
-        return "Cirkel: middelpunt: " + middelpunt.toString() + " - straal: " + radius;
+        return "Cirkel: middelpunt: " + middelpunt.toString() + " - straal: " + radius+"\n"+
+                "Omhullende: "+getOmhullende().toString();
     }
 }

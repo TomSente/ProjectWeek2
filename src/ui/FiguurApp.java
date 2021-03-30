@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class FiguurApp {
@@ -40,4 +41,5 @@ public class FiguurApp {
             }
         });
     }
+
 }

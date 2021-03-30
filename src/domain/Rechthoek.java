@@ -39,9 +39,11 @@ public class Rechthoek extends Vorm {
     }
 
     public String toString(){
-        return "Rechthoek: linkerbovenhoek "+linkerBovenHoek+ " - breedte: "+breedte+" - hoogte: "+hoogte + " " + getOmhullende().toString();
+        return "Rechthoek: linkerbovenhoek "+linkerBovenHoek+ " - breedte: "+breedte+" - hoogte: "+hoogte +"\n" +getOmhullende().toString();
 
     }
+
+    @Override
     public Omhullende getOmhullende()
     {
         return new Omhullende(linkerBovenHoek,breedte,hoogte);

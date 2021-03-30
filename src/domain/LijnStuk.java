@@ -37,6 +37,31 @@ public class LijnStuk extends Vorm {
     }
 
     public String toString() {
-        return "Lijn: startpunt: " + startPunt.toString() + "- eindpunt: " + eindPunt.toString();
+        return "Lijn: startpunt: " + startPunt.toString() + "- eindpunt: " + eindPunt.toString()+"\n"+
+                "Omhullende: "+getOmhullende().toString();
+    }
+
+    @Override
+   public Omhullende getOmhullende(){
+        int x =0;
+        int x1=0;
+        if(startPunt.getX()<eindPunt.getX()){
+            x = startPunt.getX();
+            x1 = eindPunt.getX();
+        }
+        else{x = eindPunt.getX();
+        x =  startPunt.getX();}
+        int y =0;
+        int y1 =0;
+        if(startPunt.getY()<eindPunt.getY())
+        {
+            y = startPunt.getY();
+            y1 = eindPunt.getY();
+        }else {y = eindPunt.getY(); y1= startPunt.getY();}
+        int breedte = x1-x;
+        int hoogte = y1-y;
+        Punt linksboven = new Punt(x,y);
+        Omhullende o = new Omhullende(linksboven,breedte,hoogte);
+        return o;
     }
 }

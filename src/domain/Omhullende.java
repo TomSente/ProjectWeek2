@@ -28,13 +28,14 @@ public class Omhullende {
     public Punt getLinkerBovenhoek() {
         return positieLinksBoven;
     }
+
     @Override
     public boolean equals(Object o){
         if(o instanceof Omhullende){
             Omhullende omhullende= (Omhullende) o;
             if(omhullende == null) return false;
 
-            return breedte == omhullende.breedte && hoogte == omhullende.hoogte && positieLinksBoven == omhullende.positieLinksBoven;
+            return breedte == omhullende.breedte && hoogte == omhullende.hoogte && positieLinksBoven.equals(omhullende.positieLinksBoven) ;
         }
         return false;
     }

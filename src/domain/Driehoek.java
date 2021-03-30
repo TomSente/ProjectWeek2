@@ -84,10 +84,55 @@ public class Driehoek extends Vorm{
 
     public String toString()
     {
-        return "Deze driehoek heeft als hoekpunten "+punt1.toString()+" "+punt2.toString()+" "+punt3.toString();
+        return "Deze driehoek heeft als hoekpunten "+punt1.toString()+" "+punt2.toString()+" "+punt3.toString()+"\n"+
+                "Omhullende: "+getOmhullende().toString();
     }
+    @Override
+    public Omhullende getOmhullende()
+    {
+        int x =0;
+        if(punt1.getX()<punt2.getX()){
+            if(punt1.getX()< punt2.getX()){
+                x= punt1.getX();
+            } else {x = punt3.getX();}
+        } else{ if(punt2.getX()<punt3.getX())
+        { x = punt2.getX();
+        }else{x = punt3.getX();}
+        }
+        int y =0;
+        if(punt1.getY()<punt2.getY()){
+            if(punt1.getY()< punt2.getY()){
+                y= punt1.getY();
+            } else {y = punt3.getY();}
+        } else{ if(punt2.getY()<punt3.getY())
+        { y = punt2.getY();
+        }else{y = punt3.getY();}
+        }
+        Punt linksboven = new Punt(x,y);
+        int x1 =0;
+        if(punt1.getX()>punt2.getX()){
+            if(punt1.getX()> punt2.getX()){
+                x1= punt1.getX();
+            } else {x1 = punt3.getX();}
+        } else{ if(punt2.getX()>punt3.getX())
+        { x1 = punt2.getX();
+        }else{x1 = punt3.getX();}
+        }
+        int y1 =0;
+        if(punt1.getY()>punt2.getY()){
+            if(punt1.getY()> punt2.getY()){
+                x1= punt1.getY();
+            } else {x1 = punt3.getY();}
+        } else{ if(punt2.getY()>punt3.getY())
+        { y1 = punt2.getY();
+        }else{y1 = punt3.getY();}
+        }
+        int hoogte = y1- y;
+        int breedte = x1-x;
+        Omhullende o = new Omhullende(linksboven,breedte,hoogte);
+        return o;
 
-
+    }
 
 
 

@@ -86,5 +86,36 @@ public class OmhullendeTest {
         assertFalse(omhullende.equals(null));
     }
 
+    @Test
+    public void getMaxX_geef_juiste_waarde_weer(){
+        Punt p = new Punt(0,10);
 
+        Omhullende o = new Omhullende(p,10,10);
+        assertEquals(10,o.getMaximumX());
+    }
+
+    @Test
+    public void getMinX_geeft_juiste_waarde_weer()
+    {
+        Punt p = new Punt(0,10);
+
+        Omhullende o = new Omhullende(p,10,10);
+        assertEquals(0,o.getMinimumX());
+    }
+    @Test
+    public void getMiny_geeft_juiste_waarde_weer()
+    {
+        Punt p = new Punt(0,10);
+
+        Omhullende o = new Omhullende(p,10,10);
+        assertEquals(0,o.getMinimumY());
+    }
+    @Test
+    public void getMaxY_geeft_juiste_waarde_weer()
+    {
+        Punt p = new Punt(0,10);
+
+        Omhullende o = new Omhullende(p,10,10);
+        assertEquals(10,o.getMaximumX());
+    }
 }

@@ -1,7 +1,10 @@
 package domain;
 
 import org.junit.Test;
+import org.junit.validator.PublicClassValidator;
 
+
+import javax.crypto.Cipher;
 
 import static org.junit.Assert.*;
 
@@ -81,5 +84,13 @@ public class CirkelTest {
         Cirkel cirkel2 = new Cirkel(geldigMiddelpunt,1);
         assertFalse(cirkel1.equals(cirkel2));
     }
-
+    @Test
+    public void test_omhullende_het_juiste_resultaat_geeft()
+    {
+        Punt p = new Punt(200,200);
+        Cirkel c = new Cirkel(p,20);
+        Punt p2 = new Punt(180,180);
+        Omhullende o = new Omhullende(p2, 40,40);
+        assertEquals(c.getOmhullende(),o);
+    }
 }

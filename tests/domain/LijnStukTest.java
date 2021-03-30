@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import java.net.PortUnreachableException;
+
 public class LijnStukTest {
     private Punt punt1 = new Punt(10, 20);
     private Punt zelfdeAlsPunt1 = new Punt(10, 20);
@@ -53,6 +55,17 @@ public class LijnStukTest {
     LijnStuk lijnstuk1 = new LijnStuk(punt1, punt2);
     LijnStuk lijnstuk2 = new LijnStuk(punt2, punt1);
     assertTrue(lijnstuk1.equals(lijnstuk2));
+    }
+
+   @Test
+    public void getOmhullende_geeftJuiste_waarde()
+    {
+        Punt p1 = new Punt(100,150);
+        Punt p2 = new Punt(200,250);
+        LijnStuk l = new LijnStuk(p1,p2);
+        Punt p3 = new Punt(100,150);
+        Omhullende o = new Omhullende(p3,100,100);
+        assertEquals(o,l.getOmhullende());
     }
 
 }
