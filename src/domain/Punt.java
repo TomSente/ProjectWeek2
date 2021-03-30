@@ -24,6 +24,21 @@ public class Punt {
 
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        boolean result=false;
+        if(o instanceof Punt)
+        {
+            Punt p = (Punt) o;
+            if(this.getX()==p.getX()&& this.getX()==this.getY())
+            {
+                result=true;
+            }
+        }
+        return result;
+    }
+
     public String toString(){
         return "(" + x + "," + y + ")";
     }
