@@ -27,17 +27,21 @@ public class Tekening {
     }
 
     public void voegToe(Vorm vorm) {
-        if(vorm == null)throw new IllegalArgumentException("De vorm mag niet null zijn.");
-        if(vorm.getOmhullende().getLinkerBovenhoek().getX()<MIN_X||
-           vorm.getOmhullende().getLinkerBovenhoek().getX()+vorm.getOmhullende().getBreedte()>MAX_X||
-           vorm.getOmhullende().getLinkerBovenhoek().getY()<MIN_Y||
-           vorm.getOmhullende().getLinkerBovenhoek().getX()-vorm.getOmhullende().getHoogte()<MIN_Y)
+        if (vorm == null) throw new IllegalArgumentException("De vorm mag niet null zijn.");
+        // if (vorm.getOmhullende().getLinkerBovenhoek().getX() < MIN_X ||
+        //        vorm.getOmhullende().getLinkerBovenhoek().getX() + vorm.getOmhullende().getBreedte() > MAX_X ||
+        //     vorm.getOmhullende().getLinkerBovenhoek().getY() > MAX_Y ||
+        //      vorm.getOmhullende().getLinkerBovenhoek().getY() - vorm.getOmhullende().getHoogte() < MIN_Y) {
+        //   throw new DomainException("Vorm mag niet buiten de tekening liggen.");
+        //  }
+        if (vorm.getOmhullende().getMinimumX() < MIN_X ||
+        vorm.getOmhullende().getMaximumX() > MAX_X || vorm.getOmhullende().getMinimumY() < MIN_Y || vorm.getOmhullende().getMaximumY() > MAX_Y)
         {
             throw new DomainException("Vorm mag niet buiten de tekening liggen.");
         }
 
-        for (Vorm v: vormen) {
-            if (v.equals(vorm)){
+        for (Vorm v : vormen) {
+            if (v.equals(vorm)) {
                 throw new IllegalArgumentException("Deze vorm staat al in de tekening.");
             }
         }
@@ -57,7 +61,7 @@ public class Tekening {
     }
 
     public boolean bevat(Vorm vorm) {
-        for (Vorm vorm2: vormen) {
+        for (Vorm vorm2 : vormen) {
             if (vorm2.equals(vorm)) {
                 return true;
             }
@@ -67,43 +71,35 @@ public class Tekening {
     }
 
     public boolean equals(Object o) {
-        boolean result=false;
-        if(o instanceof Tekening)
-        {
+        boolean result = false;
+        if (o instanceof Tekening) {
             Tekening t = (Tekening) o;
-            if(this.zelfdeVormen(t))
-            {
-                result=true;
+            if (this.zelfdeVormen(t)) {
+                result = true;
             }
         }
         return result;
     }
 
-    public boolean zelfdeVormen(Tekening t)
-    {
-        if(this.getVormen().size()!=t.getVormen().size())
-        {
+    public boolean zelfdeVormen(Tekening t) {
+        if (this.getVormen().size() != t.getVormen().size()) {
             return false;
         }
-        int counter=this.getVormen().size();
-        for (Vorm v1 :this.getVormen())
-        {
-            for(Vorm v2 :t.getVormen())
-            {
-                if(v1.equals(v2))
-                {
-                    counter-=1;
+        int counter = this.getVormen().size();
+        for (Vorm v1 : this.getVormen()) {
+            for (Vorm v2 : t.getVormen()) {
+                if (v1.equals(v2)) {
+                    counter -= 1;
                 }
             }
         }
-        return counter==0;
+        return counter == 0;
     }
 
     public String toString() {
-        String result = this.getNaam()+":\n";
-        for (Vorm v :this.getVormen())
-        {
-            result += v.toString()+"\n\n";
+        String result = this.getNaam() + ":\n";
+        for (Vorm v : this.getVormen()) {
+            result += v.toString() + "\n\n";
         }
         return result;
     }

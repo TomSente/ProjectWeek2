@@ -50,7 +50,7 @@ public class LijnStuk extends Vorm {
             x1 = eindPunt.getX();
         }
         else{x = eindPunt.getX();
-        x =  startPunt.getX();}
+        x1 =  startPunt.getX();}
         int y =0;
         int y1 =0;
         if(startPunt.getY()<eindPunt.getY())
