@@ -57,10 +57,7 @@ public class TekeningApp {
                     uitvoer.setPrefRowCount(tekening.getAantalVormen()*2);
                     uitvoer.setText(tekening.toString());
                     uitvoer.setVisible(true);
-
-
                 } else if (keuzeMenu.getValue().equals("stop")) {
-
                 }
 
             }

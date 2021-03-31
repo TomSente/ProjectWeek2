@@ -74,7 +74,7 @@ public class CirkelApp {
     }
 
     private void init(GridPane root, int teller){
-        invoerXLabel =  new Label("Geef de x-coÃ¶rdinaat van het middelpunt van de cirkel ");
+        invoerXLabel =  new Label("Geef de x-coordinaat van het middelpunt van de cirkel ");
         invoerX= new TextField();
 
         invoerYLabel = new Label("Geef de y-coÃ¶rdinaat van het middelpunt van de cirkel ");

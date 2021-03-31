@@ -16,6 +16,9 @@ public class TekeningTest {
     private Vorm raambalk1;
     private Vorm raambalk2;
     private Vorm schouwNietInTekening;
+    private Vorm rechthoek;
+    private Vorm cirkel;
+
 
     @Before
     public void setUp() {
@@ -27,6 +30,9 @@ public class TekeningTest {
         raambalk1 = new LijnStuk(new Punt(210, 250), new Punt(290, 250));
         raambalk2 = new LijnStuk(new Punt(250, 220), new Punt(250, 280));
         schouwNietInTekening = new Rechthoek(new Punt(150, 150), 20,40);
+        rechthoek = new Rechthoek(new Punt(30,30),2000,200);
+        cirkel = new Cirkel(new Punt(10,10),20);
+
     }
 
     @Test
@@ -101,6 +107,21 @@ public class TekeningTest {
         assertTrue(huis.equals(huisMetSchouw));
     }
 
+    @Test(expected = DomainException.class)
+    public void voegToe_moet_exception_gooien_bij_cirkel_met_te_grote_straal()
+    {
+        Tekening tekening = createTekeningMetCirkel();
+        tekening.voegToe(cirkel);
+    }
+
+    @Test(expected = DomainException.class)
+    public void voegToe_moet_exception_gooien_bij_rechthoek_die_te_lange_zijdes_heeft()
+    {
+        Tekening tekening = createTekeningMetRechtHoek();
+        tekening.voegToe(rechthoek);
+    }
+
+
     public Tekening createHuisMetSchouw() {
         Tekening huisMetSchouw = new Tekening("huisMetSchouw");
         huisMetSchouw.voegToe(gebouw);
@@ -136,6 +157,18 @@ public class TekeningTest {
         huisMetSchouwZonderDeur.voegToe(raambalk2);
         huisMetSchouwZonderDeur.voegToe(schouwNietInTekening);
         return huisMetSchouwZonderDeur;
+    }
+
+    public Tekening createTekeningMetCirkel()
+    {
+        Tekening tekeningMetCirkel = new Tekening("cirkel");
+        return  tekeningMetCirkel;
+    }
+
+    public Tekening createTekeningMetRechtHoek()
+    {
+        Tekening tekeningMetRechthoek = new Tekening("rechthoek");
+        return tekeningMetRechthoek;
     }
 
 }

@@ -52,7 +52,7 @@ public class Omhullende {
     {
         return positieLinksBoven.getX();
     }
-    public  int getMaximumY()
+    public int getMaximumY()
     {
         return positieLinksBoven.getY();
     }

@@ -91,10 +91,13 @@ public class Driehoek extends Vorm{
     public Omhullende getOmhullende()
     {
         int x =0;
-        if(punt1.getX()<punt2.getX()){
-            if(punt1.getX()< punt2.getX()){
+        if(punt1.getX()<punt2.getX())
+        {
+            if(punt1.getX()< punt2.getX())
+            {
                 x= punt1.getX();
-            } else {x = punt3.getX();}
+            }
+            else {x = punt3.getX();}
         } else{ if(punt2.getX()<punt3.getX())
         { x = punt2.getX();
         }else{x = punt3.getX();}

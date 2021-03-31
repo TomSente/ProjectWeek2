@@ -155,8 +155,6 @@ public class DriehoekApp {
                 foutenboodschap.showAndWait();
             }
         });
-
-
     }
 
     private void cleanUp(GridPane root) {

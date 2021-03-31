@@ -10,7 +10,6 @@ public class Tekening {
     public static final int MIN_Y = 0;
     public static final int MAX_Y = 399;
 
-
     public Tekening(String naam) {
         if (!isValidNaam(naam)) {
             throw new IllegalArgumentException("Naam mag niet leeg zijn.");
@@ -29,6 +28,14 @@ public class Tekening {
 
     public void voegToe(Vorm vorm) {
         if(vorm == null)throw new IllegalArgumentException("De vorm mag niet null zijn.");
+        if(vorm.getOmhullende().getLinkerBovenhoek().getX()<MIN_X||
+           vorm.getOmhullende().getLinkerBovenhoek().getX()+vorm.getOmhullende().getBreedte()>MAX_X||
+           vorm.getOmhullende().getLinkerBovenhoek().getY()<MIN_Y||
+           vorm.getOmhullende().getLinkerBovenhoek().getX()-vorm.getOmhullende().getHoogte()<MIN_Y)
+        {
+            throw new DomainException("Vorm mag niet buiten de tekening liggen.");
+        }
+
         for (Vorm v: vormen) {
             if (v.equals(vorm)){
                 throw new IllegalArgumentException("Deze vorm staat al in de tekening.");
