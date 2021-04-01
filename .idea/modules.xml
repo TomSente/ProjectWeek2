@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Projectweek2.iml" filepath="$PROJECT_DIR$/.idea/Projectweek2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../../../../Academie Jaar 2020-2021/Semester 2/Project1/ProjectWeek2/WebApplicatie/WebApplicatie.iml" filepath="$PROJECT_DIR$/../../../../Academie Jaar 2020-2021/Semester 2/Project1/ProjectWeek2/WebApplicatie/WebApplicatie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProjectWeek2.iml" filepath="$PROJECT_DIR$/.idea/ProjectWeek2.iml" />
     </modules>
   </component>
 </project>
