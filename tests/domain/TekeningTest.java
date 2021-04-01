@@ -122,6 +122,14 @@ public class TekeningTest {
     }
 
 
+    @Test
+    public void voegtoe_moet_een_tekening_aanmaken_met_met_een_geldige_naam() {
+        Tekening huis = createHuisZonderShouw();
+        createHuisZonderShouw().voegToe(schouwNietInTekening);
+        assertTrue(huis.bevat(schouwNietInTekening));
+
+    }
+
     public Tekening createHuisMetSchouw() {
         Tekening huisMetSchouw = new Tekening("huisMetSchouw");
         huisMetSchouw.voegToe(gebouw);
