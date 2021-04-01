@@ -22,7 +22,7 @@ public class TekeningApp {
         naamTekeningLabel = new Label("Geef de naam van je tekening: ");
         invoerNaamTekening = new TextField();
 
-        opties = FXCollections.observableArrayList("Vorm maken","Tekening tonen","stop","");
+        opties = FXCollections.observableArrayList("Vorm maken","Tekening tonen","stop","te");
         keuzeMenu = new ComboBox<>(opties);
 
         root.add(naamTekeningLabel,0,0);
@@ -47,16 +47,13 @@ public class TekeningApp {
         keuzeMenu.setOnAction(eventKeuze -> {
             uitvoer.setVisible(false);
             if (keuzeMenu.getValue() != null) {
-
                 if (keuzeMenu.getValue().equals("Vorm maken")) {
                     keuzeMenu.setValue("");
+                    root.getChildren().clear();
                     new VormMakenApp(root, tekening);
 
                 } else if (keuzeMenu.getValue().equals("Tekening tonen")) {
-                    keuzeMenu.setValue("");
-                    uitvoer.setPrefRowCount(tekening.getAantalVormen()*2);
-                    uitvoer.setText(tekening.toString());
-                    uitvoer.setVisible(true);
+                    new TekenVenster(root,tekening);
                 } else if (keuzeMenu.getValue().equals("stop")) {
                 }
 

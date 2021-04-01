@@ -1,14 +1,19 @@
 package domain;
 
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polyline;
+
 import java.util.ArrayList;
 
-public class Tekening {
+public class Tekening implements Drawable{
     private String naam;
     ArrayList<Vorm> vormen;
     public static final int MIN_X = 0;
     public static final int MAX_X = 399;
     public static final int MIN_Y = 0;
     public static final int MAX_Y = 399;
+
 
     public Tekening(String naam) {
         if (!isValidNaam(naam)) {
@@ -103,6 +108,15 @@ public class Tekening {
         }
         return result;
     }
+
+    public void teken(Pane root)
+    {
+        for(Vorm v : vormen)
+        {
+            v.teken(root);
+        }
+    }
+
 
 
 }

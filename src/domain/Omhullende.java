@@ -54,10 +54,10 @@ public class Omhullende {
     }
     public int getMaximumY()
     {
-        return positieLinksBoven.getY();
+        return positieLinksBoven.getY()+hoogte;
     }
     public int getMinimumY()
     {
-        return positieLinksBoven.getY()-hoogte;
+        return positieLinksBoven.getY();
     }
 }

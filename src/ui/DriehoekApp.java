@@ -11,8 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
 public class DriehoekApp {
-    private Label invoerXPunt1Label, invoerYPunt1Label, invoerXPunt2Label, invoerYPunt2Label, invoerXPunt3Label, invoerYPunt3Label;
-    private TextField invoerXPunt1, invoerYPunt1, invoerXPunt2, invoerYPunt2, invoerXPunt3, invoerYPunt3;
+    private Label invoerXPunt1Label, invoerYPunt1Label, invoerXPunt2Label, invoerYPunt2Label, invoerXPunt3Label, invoerYPunt3Label, invoerKleurLabel;
+    private TextField invoerXPunt1, invoerYPunt1, invoerXPunt2, invoerYPunt2, invoerXPunt3, invoerYPunt3,invoerKleur;
     private Punt punt1, punt2, punt3;
     private Vorm vorm;
     private Alert foutenboodschap = new Alert(Alert.AlertType.WARNING);
@@ -95,6 +95,7 @@ public class DriehoekApp {
                 foutenboodschap.setTitle("Warning");
                 foutenboodschap.setContentText("x coordinaat moet een geheel getal zijn");
                 foutenboodschap.showAndWait();
+                throw new UiException(e.getMessage());
             }
             });
 

@@ -27,7 +27,7 @@ public class CirkelTest {
     public void test_Cirkel_met_geldige_waarden() {
         Cirkel cirkel = new Cirkel(geldigMiddelpunt, geldigeRadius);
         assertNotNull(cirkel);
-        assertEquals(geldigMiddelpunt, cirkel.getMiddelpunt());
+        assertEquals(geldigMiddelpunt, cirkel.getMiddelPunt());
         assertEquals(geldigeRadius, cirkel.getRadius());
     }
     //     ik krijg een exception wanneer ik een cirkel wil aanmaken met middelpunt = null

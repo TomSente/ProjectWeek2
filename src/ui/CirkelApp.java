@@ -9,8 +9,8 @@ import javafx.scene.text.Text;
 
 public class CirkelApp {
 
-    private Label invoerXLabel, invoerYLabel, invoerStraalLabel;
-    private TextField invoerX, invoerY, invoerStraal;
+    private Label invoerXLabel, invoerYLabel, invoerStraalLabel, invoerKleurLabel;
+    private TextField invoerX, invoerY, invoerStraal, invoerKleur;
 
     private Alert foutenboodschap = new Alert(Alert.AlertType.WARNING);
 
@@ -52,23 +52,46 @@ public class CirkelApp {
         invoerStraal.setOnAction(eventIngaveStraal -> {
             try {
                 Punt middelpunt = new Punt(Integer.parseInt(invoerX.getText()),Integer.parseInt(invoerY.getText()));
+                System.out.println(middelpunt.toString());
                 vorm = new Cirkel(middelpunt, Integer.parseInt(invoerStraal.getText()));
+                System.out.println(vorm.getOmhullende().toString());
                 tekening.voegToe(vorm);
                 cleanUp(root);
 
-            } catch (NumberFormatException ne){
+            } catch (NumberFormatException ne)
+            {
                 invoerStraal.clear();
                 foutenboodschap.setTitle("Warning");
                 foutenboodschap.setContentText("straal van de cirkel moet een geheel getal zijn");
                 foutenboodschap.showAndWait();
             }
-            catch (DomainException e){
+            catch (DomainException e)
+            {
                 cleanUp(root);
                 foutenboodschap.setTitle("Warning");
                 foutenboodschap.setHeaderText(null);
                 foutenboodschap.setContentText(e.getMessage());
                 foutenboodschap.showAndWait();
             }
+            try
+            {
+
+            }
+        catch (NumberFormatException ne){
+            invoerStraal.clear();
+            foutenboodschap.setTitle("Warning");
+            foutenboodschap.setContentText("straal van de cirkel moet een geheel getal zijn");
+            foutenboodschap.showAndWait();
+        }
+            catch (DomainException e){
+            cleanUp(root);
+            foutenboodschap.setTitle("Warning");
+            foutenboodschap.setHeaderText(null);
+            foutenboodschap.setContentText(e.getMessage());
+            foutenboodschap.showAndWait();
+        }
+
+
 
         });
     }
@@ -115,13 +138,13 @@ public class CirkelApp {
             }
         });
     }
-    private void  cleanUp(GridPane root){
+    private void  cleanUp(GridPane root)
+    {
         root.getChildren().remove(invoerXLabel);
         root.getChildren().remove(invoerX);
         root.getChildren().remove(invoerYLabel);
         root.getChildren().remove(invoerY);
         root.getChildren().remove(invoerStraalLabel);
         root.getChildren().remove(invoerStraal);
-
     }
 }

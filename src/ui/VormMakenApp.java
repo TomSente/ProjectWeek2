@@ -13,22 +13,26 @@ public class VormMakenApp {
 
     public VormMakenApp(GridPane root, Tekening tekening) {
 
-        this.root = root;
+       this.root = root;
         mogelijkeFiguren = FXCollections.observableArrayList("Cirkel","Rechthoek","Lijnstuk","Driehoek");
         keuzeMenu = new ComboBox(mogelijkeFiguren);
 
         root.add(keuzeMenu,0,1);
         keuzeMenu.setOnAction(eventKeuze -> {
                     if (keuzeMenu.getValue() != null) {
-                        if (keuzeMenu.getValue().equals("Cirkel")) {
+                        if (keuzeMenu.getValue().equals("Cirkel"))
+                        {
                             new CirkelApp(root, tekening);
 
-                        } else if (keuzeMenu.getValue().equals("Rechthoek")) {
+                        } else if (keuzeMenu.getValue().equals("Rechthoek"))
+                        {
                             new RechthoekApp(root, tekening);
 
-                        } else if (keuzeMenu.getValue().equals("Lijnstuk")) {
+                        } else if (keuzeMenu.getValue().equals("Lijnstuk"))
+                        {
                             new LijnStukApp(root, tekening);
-                        } else if (keuzeMenu.getValue().equals("Driehoek")) {
+                        } else if (keuzeMenu.getValue().equals("Driehoek"))
+                        {
                             new DriehoekApp(root, tekening);
                         }
                         root.getChildren().remove(keuzeMenu);
