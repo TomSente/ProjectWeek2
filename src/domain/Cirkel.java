@@ -1,6 +1,10 @@
 package domain;
 
-public class Cirkel extends Vorm {
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+
+public class Cirkel extends Vorm implements Drawable {
     private Punt middelpunt;
     private int radius;
 
@@ -23,13 +27,10 @@ public class Cirkel extends Vorm {
         this.radius = radius;
     }
 
-    public Punt getMiddelpunt() {
-        return middelpunt;
-    }
-
     public int getRadius() {
         return radius;
     }
+    public Punt getMiddelPunt() {return middelpunt; }
 
     @Override
     public boolean equals(Object o)
@@ -38,7 +39,7 @@ public class Cirkel extends Vorm {
         if(o instanceof Cirkel)
         {
             Cirkel c = (Cirkel) o;
-            if(this.getMiddelpunt().equals(c.getMiddelpunt())&&this.getRadius()==c.getRadius())
+            if(this.getMiddelPunt().equals(c.getMiddelPunt())&&this.getRadius()==c.getRadius())
             {
                 result=true;
             }
@@ -56,8 +57,25 @@ public class Cirkel extends Vorm {
 
     }
 
+
+
     public String toString() {
         return "Cirkel: middelpunt: " + middelpunt.toString() + " - straal: " + radius+"\n"+
                 "Omhullende: "+getOmhullende().toString();
     }
+
+    @Override
+    public Color getKleur() {
+        return super.getKleur();
+    }
+
+    public void teken(Pane root)
+    {
+
+        Circle cirkel = new Circle(this.getMiddelPunt().getX(), this.getMiddelPunt().getY(), this.getRadius());
+        cirkel.setFill(this.getKleur());
+        cirkel.setStroke(Color.BLACK);
+        root.getChildren().add(cirkel);
+    }
+
 }

@@ -1,10 +1,14 @@
 package domain;
 
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polyline;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Driehoek extends Vorm{
+public class Driehoek extends Vorm implements Drawable{
     private Punt punt1;
     private Punt punt2;
     private Punt punt3;
@@ -87,6 +91,9 @@ public class Driehoek extends Vorm{
         return "Deze driehoek heeft als hoekpunten "+punt1.toString()+" "+punt2.toString()+" "+punt3.toString()+"\n"+
                 "Omhullende: "+getOmhullende().toString();
     }
+
+
+
     @Override
     public Omhullende getOmhullende()
     {
@@ -135,6 +142,22 @@ public class Driehoek extends Vorm{
         Omhullende o = new Omhullende(linksboven,breedte,hoogte);
         return o;
 
+    }
+
+    @Override
+    public Color getKleur() {
+        return super.getKleur();
+    }
+
+    @Override
+    public void teken(Pane root)
+    {
+        Polyline driehoek = new Polyline();
+        driehoek.setFill(this.getKleur());
+        driehoek.setStroke(Color.BLACK);
+        driehoek.getPoints().addAll(new Double[]{(double) this.getHoekPunt1().getX(), (double) this.getHoekPunt1().getY(), (double) this.getHoekPunt2().getX(),
+                (double) this.getHoekPunt2().getY(), (double) this.getHoekPunt3().getX(), (double) this.getHoekPunt3().getY(),(double) this.getHoekPunt1().getX(),(double) this.getHoekPunt1().getY()});
+        root.getChildren().add(driehoek);
     }
 
 

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WebApplicatie:war">
+    <output-path>$PROJECT_DIR$/../../../../Academie Jaar 2020-2021/Semester 2/Project1/ProjectWeek2/WebApplicatie/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>WebApplicatie</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="WebApplicatie-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="WebApplicatie:war exploded" />
+    </root>
+  </artifact>
+</component>
