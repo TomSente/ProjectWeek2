@@ -3,8 +3,9 @@ package domain;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public abstract class Vorm {
+public abstract class Vorm implements Drawable{
    private Color kleur = Color.WHITE;
+   private boolean isZichtbaar=true;
 
    public Color getKleur() {
       return kleur;
@@ -13,14 +14,22 @@ public abstract class Vorm {
    public void setKleur(Color kleur) {
       if(kleur==null)
       {
-         throw new IllegalArgumentException("kleur mag niet null zijn");
+         throw new DomainException("kleur mag niet null zijn");
+
       }
       this.kleur = kleur;
    }
 
+   public boolean isZichtbaar()
+   {
+      return this.isZichtbaar;
+   }
+
+   public void setZichtbaar(boolean b)
+   {
+      this.isZichtbaar=b;
+   }
+
    public abstract Omhullende getOmhullende();
 
-   public abstract String toString();
-
-   public abstract void teken(Pane root);
 }

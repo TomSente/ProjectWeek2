@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Tekening implements Drawable{
     private String naam;
-    ArrayList<Vorm> vormen;
+    private ArrayList<Vorm> vormen;
     public static final int MIN_X = 0;
     public static final int MAX_X = 399;
     public static final int MIN_Y = 0;
@@ -17,7 +17,7 @@ public class Tekening implements Drawable{
 
     public Tekening(String naam) {
         if (!isValidNaam(naam)) {
-            throw new IllegalArgumentException("Naam mag niet leeg zijn.");
+            throw new DomainException("Naam mag niet leeg zijn.");
         }
         vormen = new ArrayList<>();
         this.naam = naam;
@@ -33,22 +33,14 @@ public class Tekening implements Drawable{
 
     public void voegToe(Vorm vorm) {
         if (vorm == null) throw new IllegalArgumentException("De vorm mag niet null zijn.");
-        // if (vorm.getOmhullende().getLinkerBovenhoek().getX() < MIN_X ||
-        //        vorm.getOmhullende().getLinkerBovenhoek().getX() + vorm.getOmhullende().getBreedte() > MAX_X ||
-        //     vorm.getOmhullende().getLinkerBovenhoek().getY() > MAX_Y ||
-        //      vorm.getOmhullende().getLinkerBovenhoek().getY() - vorm.getOmhullende().getHoogte() < MIN_Y) {
-        //   throw new DomainException("Vorm mag niet buiten de tekening liggen.");
-        //  }
         if (vorm.getOmhullende().getMinimumX() < MIN_X ||
         vorm.getOmhullende().getMaximumX() > MAX_X || vorm.getOmhullende().getMinimumY() < MIN_Y || vorm.getOmhullende().getMaximumY() > MAX_Y)
         {
             throw new DomainException("Vorm mag niet buiten de tekening liggen.");
         }
-
-        for (Vorm v : vormen) {
-            if (v.equals(vorm)) {
-                throw new IllegalArgumentException("Deze vorm staat al in de tekening.");
-            }
+        if (this.bevat(vorm))
+        {
+            throw new DomainException("Deze vorm staat al in de tekening.");
         }
         vormen.add(vorm);
     }
@@ -59,10 +51,6 @@ public class Tekening implements Drawable{
 
     public void verwijder(Vorm vorm) {
         vormen.remove(vorm);
-    }
-
-    public ArrayList<Vorm> getVormen() {
-        return vormen;
     }
 
     public boolean bevat(Vorm vorm) {
@@ -87,12 +75,12 @@ public class Tekening implements Drawable{
     }
 
     public boolean zelfdeVormen(Tekening t) {
-        if (this.getVormen().size() != t.getVormen().size()) {
+        if (this.getAantalVormen()!=t.getAantalVormen()) {
             return false;
         }
-        int counter = this.getVormen().size();
-        for (Vorm v1 : this.getVormen()) {
-            for (Vorm v2 : t.getVormen()) {
+        int counter = this.getAantalVormen();
+        for (Vorm v1 : this.vormen) {
+            for (Vorm v2 : t.vormen) {
                 if (v1.equals(v2)) {
                     counter -= 1;
                 }
@@ -103,7 +91,7 @@ public class Tekening implements Drawable{
 
     public String toString() {
         String result = this.getNaam() + ":\n";
-        for (Vorm v : this.getVormen()) {
+        for (Vorm v : this.vormen) {
             result += v.toString() + "\n\n";
         }
         return result;
@@ -113,8 +101,20 @@ public class Tekening implements Drawable{
     {
         for(Vorm v : vormen)
         {
-            v.teken(root);
+            if(v.isZichtbaar())
+            {
+                v.teken(root);
+            }
         }
+    }
+
+    public Vorm getVorm(int i)
+    {
+        if(i<0||i>=vormen.size())
+        {
+            throw new DomainException("");
+        }
+        return this.vormen.get(i);
     }
 
 

@@ -39,8 +39,8 @@ public class Omhullende {
         }
         return false;
     }
-
-    public String toString(){
+    public String toString()
+    {
         return "Omhullende: "+positieLinksBoven+ " - "+breedte+" - "+hoogte;
 
     }

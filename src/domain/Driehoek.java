@@ -153,11 +153,10 @@ public class Driehoek extends Vorm implements Drawable{
     public void teken(Pane root)
     {
         Polyline driehoek = new Polyline();
-
         driehoek.setFill(this.getKleur());
         driehoek.setStroke(Color.BLACK);
         driehoek.getPoints().addAll(new Double[]{(double) this.getHoekPunt1().getX(), (double) this.getHoekPunt1().getY(), (double) this.getHoekPunt2().getX(),
-                (double) this.getHoekPunt2().getY(), (double) this.getHoekPunt3().getX(), (double) this.getHoekPunt3().getY()});
+                (double) this.getHoekPunt2().getY(), (double) this.getHoekPunt3().getX(), (double) this.getHoekPunt3().getY(),(double) this.getHoekPunt1().getX(),(double) this.getHoekPunt1().getY()});
         root.getChildren().add(driehoek);
     }
 

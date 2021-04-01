@@ -59,8 +59,6 @@ public class TekeningApp {
 
             }
         });
-
-
     }
 
     public void toonWaarschuwing(String s){
